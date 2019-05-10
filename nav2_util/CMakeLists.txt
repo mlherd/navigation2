@@ -24,6 +24,7 @@ add_library(${library_name} SHARED
   src/lifecycle_service_client.cpp
   src/string_utils.cpp
   src/lifecycle_utils.cpp
+  src/robot_utils.cpp
 )
 
 ament_target_dependencies(${library_name}
