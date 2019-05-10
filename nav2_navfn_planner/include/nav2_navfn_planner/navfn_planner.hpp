@@ -29,7 +29,7 @@
 #include "geometry_msgs/msg/point.hpp"
 #include "nav_msgs/msg/path.hpp"
 #include "visualization_msgs/msg/marker.hpp"
-#include "nav2_robot/robot.hpp"
+#include "nav2_util/robot_utils.hpp"
 
 namespace nav2_navfn_planner
 {
@@ -137,7 +137,7 @@ private:
   // Whether to use the astar planner or default dijkstras
   bool use_astar_;
 
-  std::unique_ptr<nav2_robot::Robot> robot_;
+  std::unique_ptr<nav2_util::RobotStateHelper> robot_state_;
 };
 
 }  // namespace nav2_navfn_planner

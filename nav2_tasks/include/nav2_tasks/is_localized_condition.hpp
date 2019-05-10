@@ -19,7 +19,7 @@
 #include <memory>
 #include "rclcpp/rclcpp.hpp"
 #include "behaviortree_cpp/condition_node.h"
-#include "nav2_robot/robot.hpp"
+#include "nav2_util/robot_utils.hpp"
 #include "geometry_msgs/msg/pose_with_covariance_stamped.hpp"
 
 namespace nav2_tasks
@@ -49,7 +49,7 @@ public:
       node_->get_parameter_or<double>("is_localized_condition.y_tol", y_tol_, 0.25);
       node_->get_parameter_or<double>("is_localized_condition.rot_tol", rot_tol_, M_PI / 4);
 
-      robot_ = std::make_unique<nav2_robot::Robot>(node_);
+      robot_state_ = std::make_unique<nav2_util::RobotStateHelper>(node_);
 
       initialized_ = true;
     }
@@ -65,7 +65,7 @@ public:
   {
     auto current_pose = std::make_shared<geometry_msgs::msg::PoseWithCovarianceStamped>();
 
-    if (!robot_->getCurrentPose(current_pose)) {
+    if (!robot_state_->getCurrentPose(current_pose)) {
       RCLCPP_DEBUG(node_->get_logger(), "Current robot pose is not available.");
       return false;
     }
@@ -90,7 +90,7 @@ private:
   static const int cov_a_ = 35;
 
   rclcpp::Node::SharedPtr node_;
-  std::unique_ptr<nav2_robot::Robot> robot_;
+  std::unique_ptr<nav2_util::RobotStateHelper> robot_state_;
 
   bool initialized_;
   double x_tol_;

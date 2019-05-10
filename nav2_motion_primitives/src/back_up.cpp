@@ -44,7 +44,7 @@ nav2_tasks::TaskStatus BackUp::onRun(const nav2_tasks::BackUpCommand::SharedPtr 
       "will only move in X.");
   }
   command_x_ = command->x;
-  if (!robot_->getOdometry(initial_pose_)) {
+  if (!robot_state_->getOdometry(initial_pose_)) {
     RCLCPP_ERROR(node_->get_logger(), "initial robot odom pose is not available.");
     return nav2_tasks::TaskStatus::FAILED;
   }
@@ -68,7 +68,7 @@ nav2_tasks::TaskStatus BackUp::controlledBackup()
 {
   auto current_odom_pose = std::shared_ptr<nav_msgs::msg::Odometry>();
 
-  if (!robot_->getOdometry(current_odom_pose)) {
+  if (!robot_state_->getOdometry(current_odom_pose)) {
     RCLCPP_ERROR(node_->get_logger(), "Current robot odom is not available.");
     return TaskStatus::FAILED;
   }
@@ -83,12 +83,12 @@ nav2_tasks::TaskStatus BackUp::controlledBackup()
 
   if (distance >= abs(command_x_)) {
     cmd_vel.linear.x = 0;
-    robot_->sendVelocity(cmd_vel);
+    vel_publisher_->sendVelocity(cmd_vel);
     return TaskStatus::SUCCEEDED;
   }
   // TODO(mhpanah): cmd_vel value should be passed as a parameter
   command_x_ < 0 ? cmd_vel.linear.x = -0.025 : cmd_vel.linear.x = 0.025;
-  robot_->sendVelocity(cmd_vel);
+  vel_publisher_->sendVelocity(cmd_vel);
 
   return TaskStatus::RUNNING;
 }

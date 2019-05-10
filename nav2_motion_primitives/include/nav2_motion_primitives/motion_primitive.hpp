@@ -26,7 +26,7 @@
 #include "geometry_msgs/msg/twist.hpp"
 #include "nav2_tasks/task_status.hpp"
 #include "nav2_tasks/task_server.hpp"
-#include "nav2_robot/robot.hpp"
+#include "nav2_util/robot_utils.hpp"
 
 namespace nav2_motion_primitives
 {
@@ -45,7 +45,8 @@ public:
     task_server_(nullptr),
     taskName_(nav2_tasks::getTaskName<CommandMsg, ResultMsg>())
   {
-    robot_ = std::make_unique<nav2_robot::Robot>(node);
+    robot_state_ = std::make_unique<nav2_robot::RobotStateHelper>(node);
+    vel_publisher_ = std::make_unique<nav2_robot::VelocityPublisher>(node);
 
     task_server_ = std::make_unique<nav2_tasks::TaskServer<CommandMsg, ResultMsg>>(node, false);
 
@@ -152,14 +153,15 @@ protected:
     twist.angular.x = 0.0;
     twist.angular.y = 0.0;
     twist.angular.z = 0.0;
-    robot_->sendVelocity(twist);
+    vel_publisher_->sendVelocity(twist);
 
     return status;
   }
 
   rclcpp::Node::SharedPtr node_;
 
-  std::shared_ptr<nav2_robot::Robot> robot_;
+  std::shared_ptr<nav2_robot::RobotStateHelper> robot_state_;
+  std::shared_ptr<nav2_robot::VelocityPublisher> vel_publisher_;
 
   typename std::unique_ptr<nav2_tasks::TaskServer<CommandMsg, ResultMsg>> task_server_;
 

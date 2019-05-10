@@ -72,7 +72,7 @@ NavfnPlanner::NavfnPlanner()
   plan_marker_publisher_ = this->create_publisher<visualization_msgs::msg::Marker>(
     "endpoints", 1);
 
-  robot_ = std::make_unique<nav2_robot::Robot>(temp_node);
+  robot_state_ = std::make_unique<nav2_util::RobotStateHelper>(temp_node);
 
   task_server_ = std::make_unique<nav2_tasks::ComputePathToPoseTaskServer>(temp_node, false),
   task_server_->setExecuteCallback(
@@ -107,7 +107,7 @@ NavfnPlanner::computePathToPose(const nav2_tasks::ComputePathToPoseCommand::Shar
     // Get the current pose from the robot
     auto start = std::make_shared<geometry_msgs::msg::PoseWithCovarianceStamped>();
 
-    if (!robot_->getCurrentPose(start)) {
+    if (!robot_state_->getCurrentPose(start)) {
       RCLCPP_ERROR(get_logger(), "Current robot pose is not available.");
       return TaskStatus::FAILED;
     }
