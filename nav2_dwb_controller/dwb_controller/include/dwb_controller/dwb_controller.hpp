@@ -22,6 +22,7 @@
 #include "dwb_core/common_types.hpp"
 #include "nav_2d_msgs/msg/pose2_d_stamped.hpp"
 #include "nav_2d_utils/odom_subscriber.hpp"
+#include "nav2_util/robot_utils.hpp"
 
 namespace dwb_controller
 {
@@ -44,7 +45,7 @@ protected:
   dwb_core::CostmapROSPtr cm_;
   dwb_core::DWBLocalPlanner planner_;
   std::shared_ptr<nav_2d_utils::OdomSubscriber> odom_sub_;
-  std::shared_ptr<rclcpp::Publisher<geometry_msgs::msg::Twist>> vel_pub_;
+  std::shared_ptr<nav2_util::VelocityPublisher> vel_publisher_;
   tf2_ros::Buffer tfBuffer_;
   tf2_ros::TransformListener tfListener_;
 };

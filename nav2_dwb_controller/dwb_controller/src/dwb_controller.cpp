@@ -42,8 +42,7 @@ DwbController::DwbController(rclcpp::executor::Executor & executor)
   cm_ = std::make_shared<nav2_costmap_2d::Costmap2DROS>("local_costmap", tfBuffer_);
   executor.add_node(cm_);
   odom_sub_ = std::make_shared<nav_2d_utils::OdomSubscriber>(*this);
-  vel_pub_ =
-    this->create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 1);
+  vel_publisher_ = std::make_shared<nav2_util::VelocityPublisher>(node);
 
   auto nh = shared_from_this();
   planner_.initialize(nh, shared_ptr<tf2_ros::Buffer>(&tfBuffer_, NO_OP_DELETER), cm_);
@@ -122,7 +121,7 @@ DwbController::followPath(const nav2_tasks::FollowPathCommand::SharedPtr command
 void DwbController::publishVelocity(const nav_2d_msgs::msg::Twist2DStamped & velocity)
 {
   auto cmd_vel = nav_2d_utils::twist2Dto3D(velocity.velocity);
-  vel_pub_->publish(cmd_vel);
+  vel_publisher_->publishCommand(cmd_vel);
 }
 
 void DwbController::publishZeroVelocity()

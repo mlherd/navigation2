@@ -153,7 +153,7 @@ protected:
     twist.angular.x = 0.0;
     twist.angular.y = 0.0;
     twist.angular.z = 0.0;
-    vel_publisher_->sendVelocity(twist);
+    vel_publisher_->publishCommand(twist);
 
     return status;
   }

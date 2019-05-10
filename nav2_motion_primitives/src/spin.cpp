@@ -87,14 +87,14 @@ nav2_tasks::TaskStatus Spin::timedSpin()
   cmd_vel.linear.x = 0.0;
   cmd_vel.linear.y = 0.0;
   cmd_vel.angular.z = 0.5;
-  vel_publisher_->sendVelocity(cmd_vel);
+  vel_publisher_->publishCommand(cmd_vel);
 
   // TODO(orduno) #423 fixed time
   auto current_time = std::chrono::system_clock::now();
   if (current_time - start_time_ >= 6s) {  // almost 180 degrees
     // Stop the robot
     cmd_vel.angular.z = 0.0;
-    vel_publisher_->sendVelocity(cmd_vel);
+    vel_publisher_->publishCommand(cmd_vel);
 
     return TaskStatus::SUCCEEDED;
   }
@@ -136,7 +136,7 @@ nav2_tasks::TaskStatus Spin::controlledSpin()
   cmd_vel.linear.y = 0.0;
   cmd_vel.angular.z = vel;
 
-  vel_publisher_->sendVelocity(cmd_vel);
+  vel_publisher_->publishCommand(cmd_vel);
 
   // check if we are done
   if (dist_left >= (0.0 - goal_tolerance_angle_)) {

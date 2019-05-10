@@ -83,12 +83,12 @@ nav2_tasks::TaskStatus BackUp::controlledBackup()
 
   if (distance >= abs(command_x_)) {
     cmd_vel.linear.x = 0;
-    vel_publisher_->sendVelocity(cmd_vel);
+    vel_publisher_->publishCommand(cmd_vel);
     return TaskStatus::SUCCEEDED;
   }
   // TODO(mhpanah): cmd_vel value should be passed as a parameter
   command_x_ < 0 ? cmd_vel.linear.x = -0.025 : cmd_vel.linear.x = 0.025;
-  vel_publisher_->sendVelocity(cmd_vel);
+  vel_publisher_->publishCommand(cmd_vel);
 
   return TaskStatus::RUNNING;
 }
