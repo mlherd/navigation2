@@ -45,8 +45,8 @@ public:
     task_server_(nullptr),
     taskName_(nav2_tasks::getTaskName<CommandMsg, ResultMsg>())
   {
-    robot_state_ = std::make_unique<nav2_robot::RobotStateHelper>(node);
-    vel_publisher_ = std::make_unique<nav2_robot::VelocityPublisher>(node);
+    robot_state_ = std::make_unique<nav2_util::RobotStateHelper>(node);
+    vel_publisher_ = std::make_unique<nav2_util::VelocityPublisher>(node);
 
     task_server_ = std::make_unique<nav2_tasks::TaskServer<CommandMsg, ResultMsg>>(node, false);
 
@@ -160,8 +160,8 @@ protected:
 
   rclcpp::Node::SharedPtr node_;
 
-  std::shared_ptr<nav2_robot::RobotStateHelper> robot_state_;
-  std::shared_ptr<nav2_robot::VelocityPublisher> vel_publisher_;
+  std::shared_ptr<nav2_util::RobotStateHelper> robot_state_;
+  std::shared_ptr<nav2_util::VelocityPublisher> vel_publisher_;
 
   typename std::unique_ptr<nav2_tasks::TaskServer<CommandMsg, ResultMsg>> task_server_;
 
