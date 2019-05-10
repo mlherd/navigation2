@@ -9,27 +9,16 @@
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <build_depend>nav2_common</build_depend>
+  <depend>nav2_common</depend>
 
-  <build_depend>rclcpp</build_depend>
-  <build_depend>visualization_msgs</build_depend>
-  <build_depend>nav2_tasks</build_depend>
-  <build_depend>nav2_util</build_depend>
-  <build_depend>nav2_msgs</build_depend>
-  <build_depend>nav2_robot</build_depend>
-  <build_depend>nav_msgs</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>builtin_interfaces</build_depend>
-
-  <exec_depend>rclcpp</exec_depend>
-  <exec_depend>visualization_msgs</exec_depend>
-  <exec_depend>nav2_tasks</exec_depend>
-  <exec_depend>nav2_msgs</exec_depend>
-  <exec_depend>nav2_robot</exec_depend>
-  <exec_depend>nav2_util</exec_depend>
-  <exec_depend>nav_msgs</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>builtin_interfaces</exec_depend>
+  <depend>rclcpp</depend>
+  <depend>visualization_msgs</depend>
+  <depend>nav2_tasks</depend>
+  <depend>nav2_util</depend>
+  <depend>nav2_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>builtin_interfaces</depend>
 
   <test_depend>ament_lint_common</test_depend>
   <test_depend>ament_lint_auto</test_depend>
