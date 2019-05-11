@@ -76,15 +76,16 @@ void MapServer::getParameters()
       map_filename_ = std::string(dirname(fname_copy)) + '/' + map_filename_;
       free(fname_copy);
     }
-  } catch (YAML::Exception) {
-    std::string msg = "'" + yaml_filename_ + "' does not contain an image tag or it is invalid";
+  } catch (YAML::Exception & e) {
+    std::string msg = "'" + yaml_filename_ + \
+      "' does not contain an image tag or it is invalid: " + e.what();
     throw std::runtime_error(msg);
   }
 
   // Get the map type so that we can create the correct map loader
   try {
     map_type_ = doc_["map_type"].as<std::string>();
-  } catch (YAML::Exception) {
+  } catch (YAML::Exception & /*e*/) {
     // Default to occupancy grid if not specified in the YAML file
     map_type_ = "occupancy";
   }

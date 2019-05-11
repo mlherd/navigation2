@@ -331,7 +331,7 @@ void StaticLayer::updateCosts(
     geometry_msgs::msg::TransformStamped transform;
     try {
       transform = tf_->lookupTransform(map_frame_, global_frame_, tf2::TimePointZero);
-    } catch (tf2::TransformException ex) {
+    } catch (tf2::TransformException & ex) {
       RCLCPP_ERROR(node_->get_logger(), "%s", ex.what());
       return;
     }
