@@ -77,7 +77,7 @@ void MapServer::getParameters()
       free(fname_copy);
     }
   } catch (YAML::Exception & e) {
-    std::string msg = "'" + yaml_filename_ + \
+    std::string msg = "'" + yaml_filename_ +
       "' does not contain an image tag or it is invalid: " + e.what();
     throw std::runtime_error(msg);
   }
