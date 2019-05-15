@@ -86,7 +86,7 @@ void MapServer::getParameters()
   try {
     map_type_ = doc_["map_type"].as<std::string>();
   } catch (YAML::Exception & /*e*/) {
-    // Default to occupancy grid if not specified in the YAML file
+    // Default to occupancy grid if not specified
     map_type_ = "occupancy";
   }
 }
