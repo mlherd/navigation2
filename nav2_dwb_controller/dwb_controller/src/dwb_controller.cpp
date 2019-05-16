@@ -42,7 +42,7 @@ DwbController::DwbController(rclcpp::executor::Executor & executor)
   cm_ = std::make_shared<nav2_costmap_2d::Costmap2DROS>("local_costmap", tfBuffer_);
   executor.add_node(cm_);
   odom_sub_ = std::make_shared<nav_2d_utils::OdomSubscriber>(*this);
-  vel_publisher_ = std::make_shared<nav2_util::VelocityPublisher>(node);
+  vel_publisher_ = std::make_shared<nav2_util::VelocityPublisher>(temp_node);
 
   auto nh = shared_from_this();
   planner_.initialize(nh, shared_ptr<tf2_ros::Buffer>(&tfBuffer_, NO_OP_DELETER), cm_);
