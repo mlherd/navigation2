@@ -3,7 +3,7 @@
 ROS2 Navigation System
 
 
-service    | Master | Dashing-Devel | Crystal-Devel
+Test    | Master | Dashing-Devel | Crystal-Devel
 ---------- | ------ | ------- | -------
 Travis     | [![Build Status](https://travis-ci.org/ros-planning/navigation2.svg?branch=master)](https://travis-ci.org/ros-planning/navigation2)  | NA | NA |
 Build Farm | [![Build Status](http://build.ros2.org/job/Cdev__navigation2__ubuntu_bionic_amd64/badge/icon)](http://build.ros2.org/job/Cdev__navigation2__ubuntu_bionic_amd64/) | NA | NA | 
