@@ -1,4 +1,4 @@
-##Navigation2 Stack Tutorials
+## Navigation2 Stack Tutorials
 
 The best way to learn more about Navigation2 is using it.
 
@@ -6,7 +6,9 @@ The best way to learn more about Navigation2 is using it.
 
 ### Robots
   - [List of Robots Using Navigation2]()
+
 <br>
+
   - [Navigation2 with Turtlebot 3 in Gazebo](navigation2_with_turtlebot3_in_gazebo.md)
   - [Navigation2 on Real Robot](navigation2_on_real_turtlebot3.md)
 ---  
